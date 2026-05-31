@@ -14,10 +14,10 @@ connectDB();
 
 // 4. Middleware to handle data sharing and parsing incoming JSON data
 app.use(cors({
-  origin: "", // Allow your exact frontend port access
-  methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
+  origin: true,
   credentials: true
 }));
+app.options("*", cors());
 
 app.use(express.json());
 
