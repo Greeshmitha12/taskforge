@@ -24,7 +24,7 @@ export default function Dashboard({ token, onLogout }) {
 
   const fetchTasks = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/tasks", {
+      const response = await fetch("https://taskforge-h6fr.onrender.com/api/tasks", {
         headers: { "Authorization": `Bearer ${token}` }
       });
       const data = await response.json();
@@ -41,7 +41,7 @@ export default function Dashboard({ token, onLogout }) {
     if (!newTask.trim()) return;
 
     try {
-      const response = await fetch("http://localhost:5000/api/tasks", {
+      const response = await fetch("https://taskforge-h6fr.onrender.com/api/tasks", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
@@ -71,7 +71,7 @@ export default function Dashboard({ token, onLogout }) {
     setTasks(tasks.map(t => t._id === id ? { ...t, status: newStatus } : t));
 
     try {
-      const response = await fetch(`http://localhost:5000/api/tasks/${id}`, {
+      const response = await fetch(`https://taskforge-h6fr.onrender.com/api/tasks/${id}`, {
         method: "PATCH",
         headers: { 
           "Content-Type": "application/json",
@@ -88,7 +88,7 @@ export default function Dashboard({ token, onLogout }) {
 
   const deleteTask = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/tasks/${id}`, {
+      const response = await fetch(`https://taskforge-h6fr.onrender.com/api/tasks/${id}`, {
         method: "DELETE",
         headers: { "Authorization": `Bearer ${token}` }
       });
@@ -289,7 +289,7 @@ export default function Dashboard({ token, onLogout }) {
                         {filteredTasks.filter(t => t.status === column).map((task, taskIdx) => {
                           const rotationClass = (taskIdx + colIdx) % 4 === 0 ? "-rotate-3 translate-y-1.5 translate-x-0.5" : (taskIdx + colIdx) % 4 === 1 ? "rotate-2 -translate-y-1" : (taskIdx + colIdx) % 4 === 2 ? "rotate-1 translate-x-1" : "-rotate-1 -translate-y-0.5 -translate-x-0.5";
                           const charSum = task.text.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-                          const colorPool = ["bg-[#ff96b5] border-pink-300 shadow-pink-900/5 hover:bg-[#ff80a5]", "bg-[#ffbe76] border-orange-300 shadow-orange-900/5 hover:bg-[#ffa743]", "bg-[#c3b1e1] border-purple-300 shadow-purple-900/5 hover:bg-[#b09be1]", "bg-[#fdfd96] border-yellow-200 shadow-yellow-900/5 hover:bg-[#ffff80]", "bg-[#7cd1f9] border-blue-300 shadow-blue-900/5 hover:bg-[#5ac4f7]", "bg-[#badc58] border-green-300 shadow-green-900/5 hover:bg-[#a9cf3b]"];
+                          const colorPool = ["bg-[#ff96b5] border-pink-300 shadow-pink-900/5 hover:bg-[#ff80a5]", "bg-[#ffbe76] border-orange-300 shadow-orange-900/5 hover:bg-[#ffa743]", "bg-[#c3b1e1] border-purple-300 shadow-purple-900/5 hover:bg-[#b09be1]", "bg-[#fdfd96] border-yellow-200 shadow-yellow-900/5 hover:bg-[#ffff80]","bg-[#7cd1f9] border-blue-300 shadow-blue-900/5 hover:bg-[#5ac4f7]", "bg-[#badc58] border-green-300 shadow-green-900/5 hover:bg-[#a9cf3b]"];
                           const stickieBg = colorPool[charSum % colorPool.length];
                           return (
                             <div key={task._id} draggable onDragStart={(e) => handleDragStart(e, task._id)} onDragEnd={handleDragEnd} className={`w-36 h-36 p-3 flex flex-col justify-between border rounded-xs shadow-sm transition-all duration-150 hover:scale-105 hover:shadow-md hover-wobble cursor-grab active:cursor-grabbing group relative ${rotationClass} ${stickieBg}`}>

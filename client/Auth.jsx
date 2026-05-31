@@ -16,7 +16,7 @@ export default function Auth({ onLoginSuccess }) {
     const endpoint = isRegister ? "/api/auth/register" : "/api/auth/login";
 
     try {
-      const response = await fetch(`http://localhost:5000${endpoint}`, {
+      const response = await fetch(`https://taskforge-h6fr.onrender.com${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

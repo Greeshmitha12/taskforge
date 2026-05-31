@@ -14,7 +14,7 @@ connectDB();
 
 // 4. Middleware to handle data sharing and parsing incoming JSON data
 app.use(cors({
-  origin: "http://localhost:5173", // Allow your exact frontend port access
+  origin: "", // Allow your exact frontend port access
   methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
   credentials: true
 }));
